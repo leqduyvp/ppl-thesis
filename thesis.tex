@@ -20,7 +20,6 @@
 \usepackage{tocloft,calc}
 \usepackage{listings}
 \usepackage{makecell}
-\usepackage[sort&compress]{natbib}
 \usetikzlibrary{calc}
 \usepackage{algorithm}
 \usepackage{perpage}
@@ -31,12 +30,10 @@
 \let\endchangemargin=\endlist 
 
 \changefontsizes{13pt}
-\bibliographystyle{unsrt}
 
 \makeatletter
 \def\l@figure{\@dottedtocline{1}{1em}{2.2em}}
 \def\l@table{\@dottedtocline{1}{1em}{2.2em}}
-\renewcommand*{\ALG@name}{Thuật toán}
 \makeatother
 
 \sectionfont{\fontsize{15}{15}\selectfont}
@@ -51,6 +48,18 @@
 \AtBeginDocument{\addtolength\cftchapnumwidth{\widthof{\bfseries Chương }}}
 \setlength{\parskip}{0.4em}
 \setlength{\parindent}{0pt}
+\usepackage[style=ieee]{biblatex}
+\addbibresource{references.bib}
+
+\DefineBibliographyStrings{english}{
+  bibliography = {Tài liệu tham khảo},
+}
+
+% Bỏ "Online. Available:"
+\renewbibmacro*{url+urldate}{%
+  \printfield{url}%
+  \iffieldundef{urlyear}{}{\addspace\printurldate}
+}
 
 \begin{document}
 
@@ -77,14 +86,15 @@
 
 \input{chapters/c1_introduction}\newpage\cleardoublepage   % Chương 1: Mở đầu
 \input{chapters/c2_background}\newpage\cleardoublepage     % Chương 2: Cơ sở lý thuyết & Tổng quan
-% \input{chapters/c3_method}\newpage\cleardoublepage         % Chương 3: Phương pháp & Thiết kế
-% \input{chapters/c4_experiments}\newpage\cleardoublepage    % Chương 4: Thực nghiệm & Công cụ
+\input{chapters/c3_method}\newpage\cleardoublepage         % Chương 3: Phương pháp & Thiết kế
+\input{chapters/c4_experiments}\newpage\cleardoublepage    % Chương 4: Thực nghiệm & Công cụ
 % \input{chapters/c5_conclusion}\newpage\cleardoublepage     % Chương 5: Kết luận & Hướng phát triển
 
-% \phantomsection 
-% \addcontentsline{toc}{chapter}{Tài liệu tham khảo}
-% \bibliography{references}\newpage\cleardoublepage
-% \bibliographystyle{plain}
+\phantomsection 
+\addcontentsline{toc}{chapter}{Tài liệu tham khảo}
+% \bibliographystyle{plain} % hoặc apalike, plain, v.v.
+% \bibliography{references}
+\printbibliography
 
 % \appendix
 % \input{chapters/appendix}\newpage\cleardoublepage
