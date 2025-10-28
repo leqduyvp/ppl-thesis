@@ -90,7 +90,7 @@ hấp dẫn với các khung tranh, ảnh, nội dung đa phương tiện (\figu
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/HTTL.png} % Thay bằng tên file hình ảnh thực tế
-    \caption{Giao diện trang trưng bày online Hoàng thành Thăng Long \cite{hoangthanh2022}}
+    \caption{Giao diện trang trưng bày online Hoàng thành Thăng Long}
     \label{HTTL}
 \end{figure}
 
@@ -102,7 +102,7 @@ Tích Lịch Sử Hầm Bộ Tổng Tham Mưu” \cite{bttm2022}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/HTTL_360.png} % Thay bằng tên file hình ảnh thực tế
-    \caption{Giao diện tour tham quan 360 độ trên trang trưng bày online Hoàng thành Thăng Long \cite{hoangthanh2022}}
+    \caption{Giao diện tour tham quan 360 độ trên trang trưng bày online Hoàng thành Thăng Long}
     \label{HTTL_360}
 \end{figure}
 
@@ -140,6 +140,51 @@ sự tiện lợi với sự thân thiện dễ sử dụng, và sự tập trun
 Với các ưu điểm này của TMAP, em đã lựa chọn để phát triển một hệ thống
 kết hợp bao gồm trình biên soạn và trình trải nghiệm. Bộ hai ứng dụng này sẽ tạo ra
 môi trường và nền tảng để các nhà biên soạn nội dung kiến trúc nên trải nghiệm đặc
-sắc, và đưa đến cho người dùng trải nghiệm đó một cách đơn giản, gần gũi
+sắc, và đưa đến cho người dùng trải nghiệm đó một cách đơn giản, gần gũi.
 
 \section{Công nghệ sử dụng xây dựng TMAP}
+
+Tạo nên TMAP cần giải quyết 3 vấn đề chính:
+\begin{itemize}
+    \item Thứ nhất, TMAP cần có \textbf{trình biên soạn} phục vụ các nhà sáng tạo nội dung để dựng lên bản đồ.
+    \item Thứ hai, cần có một \textbf{ứng dụng di động} để người dùng có thể tương tác.
+    \item Thứ ba, cần có một \textbf{hệ thống chung} để nhận và xử lý các tác vụ từ trình biên soạn và trình trải nghiệm.
+\end{itemize}
+
+Hệ thống này sẽ bao gồm phần lưu trữ, quản lý các bản đồ được tạo ra, và cho phép trình trải nghiệm đọc lại các thông tin đó.
+
+\subsection*{a. Hệ thống máy chủ chung và trình biên soạn}
+
+Hệ thống chung (Server) và trình biên soạn được phát triển sử dụng framework \textbf{Laravel}, một framework PHP phổ biến và mạnh mẽ. Laravel cung cấp cấu trúc giúp người phát triển tập trung vào chức năng, nâng cao hiệu quả. Một số ưu điểm của Laravel gồm:
+
+\begin{itemize}
+    \item \textbf{Dễ tiếp cận:} Laravel~\cite{laravel2022} phù hợp với nhiều đối tượng lập trình viên. Nó hỗ trợ tốt cho người mới với lượng tài liệu, hướng dẫn, và video cực kỳ dồi dào. Với lập trình viên có kinh nghiệm, Laravel mang đến khả năng tối ưu, hỗ trợ các mẫu thiết kế và phát triển kiểm thử.
+    \item \textbf{Khả năng mở rộng:} Laravel kế thừa sự linh hoạt của PHP cùng các tính năng nội tại, giúp việc mở rộng hệ thống trở nên dễ dàng. Các ứng dụng phát triển bằng Laravel có thể xử lý hàng trăm triệu yêu cầu mỗi tháng.
+    \item \textbf{Cộng đồng mạnh:} Laravel là framework thân thiện, được phát triển bởi hàng ngàn lập trình viên tài năng, kết hợp tinh hoa của PHP để tạo nên một công cụ mạnh mẽ và dễ sử dụng.
+\end{itemize}
+
+\subsection*{b. Hệ thống Cơ sở dữ liệu}
+
+Cơ sở dữ liệu sử dụng \textbf{MySQL}, một cơ sở dữ liệu quan hệ phù hợp với kiến trúc dữ liệu của TMAP, tương thích tốt với nhiều loại client. Theo StackOverflow~\cite{stackoverflow2021}, MySQL liên tục được xếp hạng là cơ sở dữ liệu phổ biến nhất. Nó nổi bật ở tốc độ, độ tin cậy, khả năng mở rộng và dễ sử dụng~\cite{oracle2022}.  
+Các lợi ích chính của MySQL bao gồm:
+
+\begin{itemize}
+    \item \textbf{Tính dễ dùng:} Cài đặt nhanh chóng chỉ trong vài phút, cơ sở dữ liệu dễ quản lý.
+    \item \textbf{Độ tin cậy:} MySQL là hệ quản trị cơ sở dữ liệu lâu đời, được sử dụng và thử nghiệm hơn 25 năm bởi các công ty lớn. Nó được tin dùng cho các hệ thống tối quan trọng nhờ độ ổn định cao.
+    \item \textbf{Khả năng mở rộng:} Hỗ trợ nhân bản và xử lý lượng truy cập cực lớn. Facebook, cùng nhiều tổ chức khác, sử dụng MySQL để phục vụ hàng tỉ người dùng.
+    \item \textbf{Hiệu năng cao:} MySQL HeatWave nhanh hơn và rẻ hơn nhiều hệ quản trị khác, được chứng nhận bởi các chuẩn như TPC-H, TPC-DS, CH-benCHmark.
+    \item \textbf{Tính sẵn sàng:} Công nghệ nhân bản giúp tăng độ sẵn sàng và khả năng phục hồi dữ liệu khi có sự cố.
+    \item \textbf{Bảo mật:} Cung cấp xác thực, phân quyền, mã hóa dữ liệu, và tường lửa cho cơ sở dữ liệu.
+    \item \textbf{Tính linh hoạt:} Hỗ trợ cả SQL và NoSQL, cho phép kết hợp dữ liệu quan hệ và dữ liệu JSON trong cùng một hệ thống.
+\end{itemize}
+
+\subsection*{c. Ứng dụng trải nghiệm}
+
+Ứng dụng trải nghiệm được phát triển bằng framework \textbf{Flutter}, một framework hiện đại để phát triển ứng dụng di động đa nền tảng~\cite{flutter2022}. Các ưu điểm chính của Flutter gồm:
+
+\begin{itemize}
+    \item \textbf{Đa nền tảng:} Phát triển cả Android và iOS từ cùng một mã nguồn. Flutter không phụ thuộc vào thành phần giao diện của từng nền tảng nhờ bộ dựng hình Skia, vượt trội hơn React Native hay Xamarin.
+    \item \textbf{Tốc độ phát triển:} Dễ tái sử dụng mã nguồn, hỗ trợ thư viện phong phú giúp rút ngắn thời gian phát triển tính năng.
+    \item \textbf{Dễ học và dễ dùng:} Ngôn ngữ Dart thân thiện, dễ tiếp cận. Flutter có tài liệu và cộng đồng lớn, giúp lập trình viên nhanh chóng làm chủ công cụ.
+    \item \textbf{Trải nghiệm người dùng mượt mà:} Giao diện được biên dịch trực tiếp thành mã gốc, mang lại hiệu năng cao và tính thẩm mỹ tốt hơn so với các framework khác.
+\end{itemize}
